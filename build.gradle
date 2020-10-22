@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'fr.il_totore.manadrop' version '0.4.1-SNAPSHOT'
+}
+
+import static fr.il_totore.manadrop.MinecraftRepositoryHelper.*
+import static fr.il_totore.manadrop.MinecraftDependencyHelper.spigotApi
+
+group = 'fr.niamoroff'
+version = '1.0'
+
+sourceCompatibility = targetCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    sonatype()
+    spigotSnapshot()
+}
+
+dependencies {
+    implementation spigotApi('1.8.8')
+}
+
+checkYaml {
+    check file('src/main/resources/plugin.yml')
+    stopOnError true
+}
+
+processResources.dependsOn(checkYaml)
